@@ -5,11 +5,11 @@
  * Description: Allpay Payment Gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands.
  * Author: Allpay
  * Author URI: https://allpay.co.il
- * Version: 1.1.0
+ * Version: 1.1.1
  * Text Domain: allpay-payment-gateway
  * Domain Path: /languages
- * Tested up to: 6.6.2
- * WC tested up to: 9.3.3
+ * Tested up to: 6.7.2
+ * WC tested up to: 9.6.2
  * WC requires at least: 3.0
  *
  * License: GPLv2 or later
@@ -59,13 +59,9 @@ function allpay_action_links( $links ) {
 	return array_merge( $plugin_links, $links );	
 }
 
-// поддержка HPOS
+// HPOS support
 add_action( 'before_woocommerce_init', function() {
 	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true ); //__FILE__ должен вести в основному файлу вашего плагина
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true ); //__FILE__ should direct to your plagin main file
 	}
 } );
-
-
-
-

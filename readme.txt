@@ -4,36 +4,40 @@ Tags: payment provider, Israel, платежная система, Израил�
 Requires PHP: 5.6
 Requires at least: 4.7
 Tested up to: 6.6.2
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-With this plugin for WooCommerce business in Israel can receive payments from all over the world (except for Russia). Supported card brands: Visa, Mastercard, American Express, Diners, Isracard. Plugin developed by [Allpay Payment Service](https://www.allpay.co.il/).
+With this plugin for WooCommerce, businesses in Israel can receive payments from all over the world (except for Russia). Supported card brands: Visa, Mastercard, American Express, Diners, and Isracard. The plugin was developed by [Allpay Payment Service](https://www.allpay.co.il/).
 
 == Description ==
-The plugin allows you to accept payments online from all over the world (except for the Russian Federation) with crediting to a bank account in Israel. Cards of major brands are supported: Visa, Mastercard, American Express, Diners, Discover and JCB.
+The plugin allows you to accept online payments from all over the world (except for the Russian Federation) with funds credited to a bank account in Israel. Cards of major brands are supported: Visa, Mastercard, American Express, Diners, Discover, and JCB.
 
-It supports installments and digital invoices.
+The plugin supports Apple Pay and Bit.
+
+It also supports installments and digital invoices.
 
 ### Mobile App
 The Allpay mobile application allows you to manage transactions.
 
-### Digital invoices
+### Digital Invoices
 Automatic creation of digital invoices (kabala or hashbonit mas) through integration with a licensed service in Israel.
 
 ### Security
-Payments made via secure channel and are safe for the client, as well as transparent and legal for your business.
+Payments are made via a secure channel, ensuring safety for the customer and transparency and legality for your business.
 
 ### Features
 1. Low commission.
-2. Support by e-mail, Telegram and WhatsApp in English, Russian and Hebrew.
-3. Cards Visa, Mastercard, American Express, Diners, Isracard, JCB.
-4. Payments from all over the world (except for the Russian Federation).
-5. Installments.
-6. Digital invoices (receipts).
-7. Automatic currency converter.
-8. Mobile application for Android and iPhone.
-9. Payments pages languages: English, Hebrew and Russian.
+2. Support via email, Telegram, and WhatsApp in English, Russian, and Hebrew.
+3. Supported cards: Visa, Mastercard, American Express, Diners, Isracard, JCB.
+4. Fast payment buttons for Apple Pay and Bit.
+5. Payments from all over the world (except for the Russian Federation).
+6. Installments (tashlumim).
+7. Integration with digital invoices (receipts).
+8. Automatic currency conversion.
+9. Mobile application for Android and iPhone.
+10. Payment page available in English, Hebrew, Russian, and Arabic.
+11. Your logo on the payment page.
 
 == Screenshots ==
 1. Payment Page
@@ -41,34 +45,37 @@ Payments made via secure channel and are safe for the client, as well as transpa
 3. Allpay Transactions Screen
 
 == Installation ==
-1. [Sign up](https://www.allpay.co.il/signup) at Allpay site.
-2. In your Allpay account, go to Settings > API Integrations and click the Create Login/Key pair button.
-3. Copy & Paste the Login and Key in to the settings of the Allpay plugin.
+1. [Sign up](https://www.allpay.co.il/signup) on the Allpay website.
+2. In your Allpay account, go to Settings > API Integrations and click the "Create Login/Key Pair" button.
+3. Copy and paste the Login and Key into the settings of the Allpay plugin.
 4. Done.
 
-[Watch video instruction](https://www.allpay.co.il/integrations/wordpress#video) 
+[Watch video instructions](https://www.allpay.co.il/integrations/wordpress#video)
 
 == Frequently Asked Questions ==
 = What are the onboarding requirements? =
-Your business must be registered in Israel. For example, Osek Patur/Murshe (private entrepreneur) or Hevra Baam (LTD).
+Your business must be registered in Israel. For example, as an Osek Patur/Murshe (private entrepreneur) or Hevra Baam (LTD).
 
-= How fast is the onboarding? =
-The same day.
+= How fast is the onboarding process? =
+Same day.
 
-= How frequent are funds credited to the bank account? =
-Every 6th day of month.
+= How often are funds credited to the bank account? =
+On the 6th day of each month, with an option for weekly credits.
 
 == Changelog ==
+= 1.1.1 - 20TH FEBRUARY 2025 =
+* Fix: VAT calculation.
+
 = 1.1.0 - 6TH NOVEMBER 2024 =
-* New: Support of HPOS
-* New: Adapted to new WooCommerce checkout page
-* Fix: SSL error
-* Improvement: Plugin sends to Allpay full list of products so they can be included in receipt
+* New: Support for HPOS.
+* New: Adapted to the new WooCommerce checkout page.
+* Fix: SSL error.
+* Improvement: The plugin now sends Allpay a full list of products so they can be included in the receipt.
 
 = 1.0.4 - MONDAY, 25TH DECEMBER 2023 =
-* New: Added payment page language support for ENG, HEB and RUS
-* Fix: Payment error for logged in users on some WP versions
-* Improvement: Aligned with new Allpay payment page
+* New: Added payment page language support for ENG, HEB, and RUS.
+* Fix: Payment error for logged-in users on some WP versions.
+* Improvement: Aligned with the new Allpay payment page.
 
 = 1.0.2 - THURSDAY, 10TH AUGUST 2023 =
-* Improvement: Tested with Wordpress v6.3
+* Improvement: Tested with WordPress v6.3.
