@@ -29,14 +29,16 @@ class WC_Allpay extends WC_Payment_Gateway {
 	} 
 
 	public function webhook() {  
-		$chunks = [];
-		$wh_params = ['amount', 'order_id', 'currency', 'status', 'card_mask', 'card_brand', 'foreign_card', 'add_field_1', 'add_field_2', 'receipt'];
-		foreach($wh_params as $k) {
-			if(isset($_REQUEST[$k])) {
-				$chunks[$k] = sanitize_text_field($_REQUEST[$k]);
-			}
-		} 
-		$sign = $this->get_signature($chunks); 
+
+        $inputJSON = file_get_contents('php://input'); 
+        $input = json_decode($inputJSON, true); 
+        if(is_array($input)) { 
+            foreach($input as $k => $v) { 
+                $_REQUEST[$k] = $v; 
+            } 
+        }
+
+		$sign = $this->get_signature($_REQUEST); 
 		$order_id = $_REQUEST['order_id'];
 		$status = (int)$_REQUEST['status'];
 		if($order_id > 0 && $status == 1 && $sign == $_REQUEST['sign']) {
@@ -102,7 +104,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 
 		$customer_order = wc_get_order( $order_id );
 
-		$environment_url = 'https://allpay.to/app/?show=getpayment&mode=api6';
+		$environment_url = 'https://allpay.to/app/?show=getpayment&mode=api8';
 		
 		$user_id = get_current_user_id();
 
@@ -148,6 +150,8 @@ class WC_Allpay extends WC_Payment_Gateway {
 			}
 		}
 
+        $tax_included = wc_tax_enabled() && wc_prices_include_tax();
+
 		// Items
 		$items = [];
 		foreach ($customer_order->get_items() as $item_id => $item) {
@@ -158,20 +162,23 @@ class WC_Allpay extends WC_Payment_Gateway {
 				'name' => $item->get_name(),
 				'price' => $price, 
 				'qty' => $quantity,
+                'vat' => ($tax_included ? 1 : 0)
 			];
 		}
 		foreach ($customer_order->get_fees() as $fee_id => $fee) {
 			$items[] = [
 				'name' => $fee->get_name(),
 				'price' => $fee->get_total(),
-				'qty' => 1
+				'qty' => 1,
+                'vat' => ($tax_included ? 1 : 0)
 			];
 		}
 		if ($shipping_total = $customer_order->get_shipping_total()) {
 			$items[] = [
 				'name' => $customer_order->get_shipping_method(),
 				'price' => $shipping_total,
-				'qty' => 1
+				'qty' => 1,
+                'vat' => ($tax_included ? 1 : 0)
 			];
 		}
 		$request['items'] = $items;
@@ -206,30 +213,35 @@ class WC_Allpay extends WC_Payment_Gateway {
 		throw new Exception( __( 'Unknown error', 'allpay-payment-gateway' ) );
 	}
 
-	public function get_signature($data) {
-        ksort($data);
+    public function get_signature($params) {    
+        ksort($params);
         $chunks = [];
-        foreach($data as $k => $v) { 
-            if(is_array($v)) {
-                foreach ($v as $item) {
+
+        foreach ($params as $k => $v) { 
+            if (is_array($v)) {
+                ksort($v);
+
+                foreach ($v as $subkey => $item) {
                     if (is_array($item)) {
                         ksort($item);
                         foreach($item as $name => $val) {
-                            if (trim($val) !== '') {
+                            if ($val !== '') {
                                 $chunks[] = $val; 
-                            }	                            
+                            }	 
                         }
-                    }
+                    } elseif ($item !== '') {
+                        $chunks[] = $item; 
+                    }	   
                 }
-            } else {
-                if (trim($v) !== '') {
-                    $chunks[] = $v; 
-                }	                
-            }
+            } elseif ($v !== '') {
+                $chunks[] = $v; 
+            }	                
         }
-        $signature = hash('sha256', implode(':', $chunks) . ':' . $this->api_key);
-		return $signature;
-	}
+        
+        $signature = implode(':', $chunks) . ':' . $this->api_key;
+        $signature = hash('sha256', $signature);
+        return $signature;  
+    }  
 
 	public function get_lang() {
 		$lang = get_locale();
