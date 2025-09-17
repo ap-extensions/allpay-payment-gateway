@@ -3,8 +3,8 @@ Contributors: Allpay
 Tags: payment provider, Israel, платежная система, Израиль, Allpay
 Requires PHP: 5.6
 Requires at least: 4.7
-Tested up to: 6.6.2
-Stable tag: 1.1.1
+Tested up to: 6.8.2
+Stable tag: 1.1.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,3 +79,6 @@ On the 6th day of each month, with an option for weekly credits.
 
 = 1.0.2 - THURSDAY, 10TH AUGUST 2023 =
 * Improvement: Tested with WordPress v6.3.
+
+= 1.1.3 - THURSDAY, 10TH SEPTEMBER 2025 =
+* Fix: inclusion of taxes in payment
