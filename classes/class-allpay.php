@@ -150,7 +150,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 			}
 		}
 
-        $tax_included = wc_tax_enabled() && wc_prices_include_tax();
+        $tax_included = wc_tax_enabled() && wc_prices_include_tax() && $customer_order->get_total_tax() > 0;
 
 		// Items
 		$items = [];
