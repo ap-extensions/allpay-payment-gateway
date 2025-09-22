@@ -63,6 +63,12 @@ Same day.
 On the 6th day of each month, with an option for weekly credits.
 
 == Changelog ==
+= 1.1.3 - 22 SEPTEMBER 2025 =
+* New: VAT calculation support.
+
+= 1.1.2 - 31 AUGUST 2025 =
+* Fix: Order status wasn’t always changing to paid.
+
 = 1.1.1 - 20TH FEBRUARY 2025 =
 * Fix: VAT calculation.
 
