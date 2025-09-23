@@ -30,6 +30,14 @@ class WC_Allpay extends WC_Payment_Gateway {
 
 	public function webhook() {  
 
+        $inputJSON = file_get_contents('php://input'); 
+        $input = json_decode($inputJSON, true); 
+        if(is_array($input)) { 
+            foreach($input as $k => $v) { 
+                $_REQUEST[$k] = $v; 
+            } 
+        }
+
 		$chunks = [];
 		$wh_params = ['name', 'items', 'amount', 'order_id', 'currency', 'status', 'client_name', 
             'client_email', 'client_tehudat', 'client_phone', 'card_mask', 'card_brand', 'foreign_card', 
@@ -49,7 +57,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 			$customer_order->payment_complete($transaction_id);
 			wc_reduce_stock_levels($customer_order);	
 		} else {
-			echo 'Notification error: ' . json_encode($_REQUEST);
+			echo 'Notification error: ' . json_encode($_REQUEST) . ' / ' . $sign;
 		}
 		exit();
 	}
