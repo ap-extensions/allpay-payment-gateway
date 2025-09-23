@@ -30,15 +30,17 @@ class WC_Allpay extends WC_Payment_Gateway {
 
 	public function webhook() {  
 
-        $inputJSON = file_get_contents('php://input'); 
-        $input = json_decode($inputJSON, true); 
-        if(is_array($input)) { 
-            foreach($input as $k => $v) { 
-                $_REQUEST[$k] = $v; 
-            } 
-        }
+		$chunks = [];
+		$wh_params = ['name', 'items', 'amount', 'order_id', 'currency', 'status', 'client_name', 
+            'client_email', 'client_tehudat', 'client_phone', 'card_mask', 'card_brand', 'foreign_card', 
+            'add_field_1', 'add_field_2', 'receipt'];
+		foreach($wh_params as $k) {
+			if(isset($_REQUEST[$k])) {
+				$chunks[$k] = sanitize_text_field($_REQUEST[$k]);
+			}
+		} 
+		$sign = $this->get_signature($chunks); 
 
-		$sign = $this->get_signature($_REQUEST); 
 		$order_id = $_REQUEST['order_id'];
 		$status = (int)$_REQUEST['status'];
 		if($order_id > 0 && $status == 1 && $sign == $_REQUEST['sign']) {
