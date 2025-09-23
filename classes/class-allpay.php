@@ -36,7 +36,7 @@ class WC_Allpay extends WC_Payment_Gateway {
             'add_field_1', 'add_field_2', 'receipt'];
 		foreach($wh_params as $k) {
 			if(isset($_REQUEST[$k])) {
-				$chunks[$k] = sanitize_text_field($_REQUEST[$k]);
+				$chunks[$k] = $_REQUEST[$k];
 			}
 		} 
 		$sign = $this->get_signature($chunks); 
