@@ -251,19 +251,7 @@ class WC_Allpay extends WC_Payment_Gateway {
     }  
 
 	public function get_lang() {
-		$lang = get_locale();
-		if ( strpos($lang, 'en') === 0 ) {
-			return 'en';
-		} else if ( strpos($lang, 'de') === 0 ) {
-			return 'de';
-		} else if ( strpos($lang, 'es') === 0 ) {
-			return 'es';
-		} else if ( strpos($lang, 'fr') === 0 ) {
-			return 'fr';
-		} else if ( strpos($lang, 'ru') === 0 ) {
-			return 'ru';
-		} else {
-			return 'pl';
-		}
-	}
+        $lang = substr( get_locale(), 0, 2 );
+        return $lang;
+    }
 }
