@@ -151,12 +151,9 @@ class WC_Allpay extends WC_Payment_Gateway {
 		);
 
 		if($this->installment_n > 0 && ((int)$this->installment_min_order == 0 || $this->installment_min_order <= $customer_order->get_total())) {
-			$request['tash'] = (int)$this->installment_n;
-			if($this->installment_first_payment > 0) {
-				$request['tash_first_payment'] = (float)$this->installment_first_payment;
-			}
+			$request['inst'] = (int)$this->installment_n;
 			if($this->installment_fixed == 'yes') {
-				$request['tash_fixed'] = 1;				
+				$request['inst_fixed'] = 1;				
 			}
 		}
 
