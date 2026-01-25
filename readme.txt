@@ -3,8 +3,8 @@ Contributors: Allpay
 Tags: payment provider, Israel, платежная система, Израиль, Allpay
 Requires PHP: 5.6
 Requires at least: 4.7
-Tested up to: 6.8.2
-Stable tag: 1.1.3
+Tested up to: 6.9
+Stable tag: 1.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -28,16 +28,16 @@ Payments are made via a secure channel, ensuring safety for the customer and tra
 
 ### Features
 1. Low commission.
-2. Support via email, Telegram, and WhatsApp in English, Russian, and Hebrew.
+2. Support via email, Telegram, and WhatsApp.
 3. Supported cards: Visa, Mastercard, American Express, Diners, Isracard, JCB.
-4. Fast payment buttons for Apple Pay and Bit.
-5. Payments from all over the world (except for the Russian Federation).
+4. Fast payment buttons: Apple Pay and Bit.
+5. Payments from all countries (except the Russian Federation).
 6. Installments (tashlumim).
-7. Integration with digital invoices (receipts).
-8. Automatic currency conversion.
-9. Mobile application for Android and iPhone.
-10. Payment page available in English, Hebrew, Russian, and Arabic.
-11. Your logo on the payment page.
+7. Integration with digital receipts.
+8. Mobile app for Android and iOS.
+9. Automatic detection of payment page language. Supports 8 languages, including English, Hebrew, Russian, Arabic, and French.
+10. Your logo on the payment page.
+11. Currency display option: show prices in a customer-friendly currency while charging in ILS, USD, or EUR.
 
 == Screenshots ==
 1. Payment Page
@@ -63,6 +63,14 @@ Same day.
 On the 6th day of each month, with an option for weekly credits.
 
 == Changelog ==
+= 1.2 – 26 January 2026 =
+* New: Payment currency selector added to plugin settings.
+* New: Currency converter: show prices in a customer-friendly currency while charging in ILS, USD, or EUR.
+* New: Support of WP 6.9
+* Fix: VAT calculation for delivery.
+* Fix: Double stock deduction.
+* Fix: Issue where orders were not marked as paid.
+
 = 1.1.3 - 22 SEPTEMBER 2025 =
 * New: VAT calculation support.
 

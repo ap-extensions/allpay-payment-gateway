@@ -115,22 +115,22 @@ class WC_Allpay extends WC_Payment_Gateway {
 			'installment_n' => array(
 				'title' => __( 'Installment max payments', 'allpay-payment-gateway' ),
 				'type' => 'number',
-				'description' => __( 'Maximum number of installment payments. Up to 12, zero to disable.', 'allpay-payment-gateway' ),
+				'description' => __( 'Maximum number of installment payments. Up to 12, zero to disable', 'allpay-payment-gateway' ),
 				'desc_tip'	=> __( 'Allows client to choose number of payments. Valid for credit cards only (no debit cards)', 'allpay-payment-gateway' ),
 				'default' => 0
 			),
 			'installment_min_order' => array(
 				'title' => __( 'Installment min order amount', 'allpay-payment-gateway' ),
 				'type' => 'number',
-				'description' => __( 'Minimum order amount for installments. Zero for orders of any amount.', 'allpay-payment-gateway' ),
+				'description' => __( 'Minimum order amount for installments. Zero for orders of any amount', 'allpay-payment-gateway' ),
 				'desc_tip'	=> __( 'Enables installment option when payment amount equals or above this value', 'allpay-payment-gateway' ),
 				'default' => 1000
 			),
             'currency_payment' => array(
                 'title'       => __( 'Payment currency', 'allpay-payment-gateway' ),
                 'type'        => 'select',
-                'description' => __( 'The currency in which the payment will be accepted', 'allpay-payment-gateway' ),
-                'desc_tip'    => true,
+                'description' => __( 'Before selecting USD or EUR, make sure these currencies are enabled on your Allpay account', 'allpay-payment-gateway' ),
+                'desc_tip'	=> __( 'The currency in which the payment will be processed. Any price shown in another currency will be converted to this currency', 'allpay-payment-gateway' ),
                 'default'     => 'ILS',
                 'options'     => array(
                     'ILS' => __( 'Israeli Shekel (ILS)', 'allpay-payment-gateway' ),
