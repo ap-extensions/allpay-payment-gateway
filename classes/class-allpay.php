@@ -55,7 +55,6 @@ class WC_Allpay extends WC_Payment_Gateway {
 			$customer_order = wc_get_order($order_id);
 			$transaction_id = (int)$_REQUEST['order_id'];
 			$customer_order->payment_complete($transaction_id);
-			wc_reduce_stock_levels($customer_order);	
 		} else {
 			echo 'Notification error: ' . json_encode($_REQUEST) . ' / ' . $sign;
 		}
