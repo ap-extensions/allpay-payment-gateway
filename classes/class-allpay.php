@@ -191,36 +191,50 @@ class WC_Allpay extends WC_Payment_Gateway {
 
         $tax_included = wc_tax_enabled() && wc_prices_include_tax() && $customer_order->get_total_tax() > 0;
 
-		// Items
-		$items = [];
-		foreach ($customer_order->get_items() as $item_id => $item) {
-			$quantity = $item->get_quantity();
-			$price = ($quantity > 0) ? ( $item->get_total() + $item->get_total_tax() ) / $quantity : 0;
+        // Items
+        $items = [];
 
-			$items[] = [
-				'name' => $item->get_name(),
-				'price' => $price, 
-				'qty' => $quantity,
-                'vat' => ($tax_included ? 1 : 0)
-			];
-		}
-		foreach ($customer_order->get_fees() as $fee_id => $fee) {
-			$items[] = [
-				'name' => $fee->get_name(),
-				'price' => $fee->get_total(),
-				'qty' => 1,
-                'vat' => ($tax_included ? 1 : 0)
-			];
-		}
-		if ($shipping_total = $customer_order->get_shipping_total()) {
-			$items[] = [
-				'name' => $customer_order->get_shipping_method(),
-				'price' => $shipping_total,
-				'qty' => 1,
-                'vat' => ($tax_included ? 1 : 0)
-			];
-		}
-		$request['items'] = $items;
+        foreach ($customer_order->get_items() as $item_id => $item) {
+            $qty = (int) $item->get_quantity();
+
+            $line_total     = (float) $item->get_total();     
+            $line_total_tax = (float) $item->get_total_tax();   
+
+            $unit_price_gross = ($qty > 0) ? (($line_total + $line_total_tax) / $qty) : 0;
+
+            $items[] = [
+                'name'  => $item->get_name(),
+                'price' => $unit_price_gross,
+                'qty'   => $qty,
+                'vat'   => ($line_total_tax > 0 ? 1 : 0),
+            ];
+        }
+
+        foreach ($customer_order->get_fees() as $fee_id => $fee) {
+            $fee_total     = (float) $fee->get_total();       
+            $fee_total_tax = (float) $fee->get_total_tax();   
+
+            $items[] = [
+                'name'  => $fee->get_name(),
+                'price' => ($fee_total + $fee_total_tax),     
+                'qty'   => 1,
+                'vat'   => ($fee_total_tax > 0 ? 1 : 0),
+            ];
+        }
+
+        $shipping_total     = (float) $customer_order->get_shipping_total(); 
+        $shipping_total_tax = (float) $customer_order->get_shipping_tax();  
+
+        if ($shipping_total > 0 || $shipping_total_tax > 0) {
+            $items[] = [
+                'name'  => $customer_order->get_shipping_method(),
+                'price' => ($shipping_total + $shipping_total_tax),         
+                'qty'   => 1,
+                'vat'   => ($shipping_total_tax > 0 ? 1 : 0),
+            ];
+        }
+
+        $request['items'] = $items;
 
 		$request['sign'] = $this->get_signature($request);
 	
