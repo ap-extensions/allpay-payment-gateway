@@ -105,7 +105,19 @@ class WC_Allpay extends WC_Payment_Gateway {
 				'description' => __( 'Minimum order amount for installments. Zero for orders of any amount.', 'allpay-payment-gateway' ),
 				'desc_tip'	=> __( 'Enables installment option when payment amount equals or above this value', 'allpay-payment-gateway' ),
 				'default' => 1000
-			)
+			),
+            'currency_payment' => array(
+                'title'       => __( 'Payment currency', 'allpay-payment-gateway' ),
+                'type'        => 'select',
+                'description' => __( 'The currency in which the payment will be accepted', 'allpay-payment-gateway' ),
+                'desc_tip'    => true,
+                'default'     => 'ILS',
+                'options'     => array(
+                    'ILS' => __( 'Israeli Shekel (ILS)', 'allpay-payment-gateway' ),
+                    'USD' => __( 'US Dollar (USD)', 'allpay-payment-gateway' ),
+                    'EUR' => __( 'Euro (EUR)', 'allpay-payment-gateway' ),
+                ),
+            )
 		);		
 	}
 	
@@ -113,7 +125,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 
 		$customer_order = wc_get_order( $order_id );
 
-		$environment_url = 'https://allpay.to/app/?show=getpayment&mode=api8';
+		$environment_url = 'https://allpay.to/app/?show=getpayment&mode=api10';
 		
 		$user_id = get_current_user_id();
 
@@ -138,7 +150,8 @@ class WC_Allpay extends WC_Payment_Gateway {
 		$request = array(
 			"login"           		=> $this->api_login,
 			"amount"             	=> $customer_order->get_total(),
-			"currency"				=> get_woocommerce_currency(),
+			"currency"				=> ($this->currency_payment ?? 'ILS'),
+            "currency_display"      => get_woocommerce_currency(),
 			"lang"					=> $this->get_lang(),
 			"order_id"        		=> str_replace( "#", "", $customer_order->get_order_number() ),
 			"client_name"			=> $full_name,
