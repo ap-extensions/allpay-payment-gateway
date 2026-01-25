@@ -219,7 +219,7 @@ class WC_Allpay extends WC_Payment_Gateway {
                 'price' => ($fee_total + $fee_total_tax),     
                 'qty'   => 1,
                 'vat'   => ($fee_total_tax > 0 ? 1 : 0),
-            ];
+            ]; 
         }
 
         $shipping_total     = (float) $customer_order->get_shipping_total(); 
