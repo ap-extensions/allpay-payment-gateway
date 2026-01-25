@@ -5,6 +5,18 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class WC_Allpay extends WC_Payment_Gateway {
 
+    public $enabled;
+    public $title;
+    public $description;
+
+    public $api_login;
+    public $api_key;
+
+    public $installment_n;
+    public $installment_min_order;
+
+    public $currency_payment;
+
 	function __construct() {
 		$this->id = "allpay-payment-gateway";
 		$this->method_title = __( 'Bank cards payments via Allpay', 'allpay-payment-gateway' );
@@ -17,9 +29,17 @@ class WC_Allpay extends WC_Payment_Gateway {
 		$this->init_form_fields();
 		$this->init_settings();
 		
-		foreach ( $this->settings as $setting_key => $value ) {
-			$this->$setting_key = $value;
-		}
+        $this->enabled               = $this->get_option( 'enabled' );
+        $this->title                 = $this->get_option( 'title' );
+        $this->description           = $this->get_option( 'description' );
+
+        $this->api_login             = $this->get_option( 'api_login' );
+        $this->api_key               = $this->get_option( 'api_key' );
+
+        $this->installment_n         = (int) $this->get_option( 'installment_n', 0 );
+        $this->installment_min_order = (float) $this->get_option( 'installment_min_order', 1000 );
+
+        $this->currency_payment      = $this->get_option( 'currency_payment', 'ILS' );
 
 		add_action( 'woocommerce_api_allpay' , array($this, 'webhook') );
 		
