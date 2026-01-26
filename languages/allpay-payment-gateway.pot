@@ -160,15 +160,15 @@ msgstr ""
 
 #: classes/class-allpay.php:152
 #: classes/class-allpay.php:153
-msgid "Request the teudat zeut on the payment form"
+msgid "Request Teudat Zehut (Israeli ID) on the payment page"
 msgstr ""
 
 #: classes/class-allpay.php:156
-msgid "For Israeli citizens only"
+msgid "Only for customers from Israel"
 msgstr ""
 
 #: classes/class-allpay.php:157
-msgid "For all buyers"
+msgid "For all customers"
 msgstr ""
 
 #: classes/class-allpay.php:158

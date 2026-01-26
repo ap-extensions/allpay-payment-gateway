@@ -3,23 +3,22 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Allpay payment gateway 1.2\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/allpay-payment-"
-"gateway\n"
-"POT-Creation-Date: 2026-01-26T08:47:32+00:00\n"
-"PO-Revision-Date: 2026-01-26 11:12+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/allpay-payment-gateway\n"
+"Last-Translator: Allpay <info@allpay.co.il>\n"
+"Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"POT-Creation-Date: 2026-01-26T12:46:43+00:00\n"
+"PO-Revision-Date: 2026-01-26 15:00+0200\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: allpay-payment-gateway\n"
 
 #. Plugin Name of the plugin
 #: allpay-gateway.php
 msgid "Allpay payment gateway"
-msgstr "Платежныи шлюз Allpay"
+msgstr "Платежный шлюз Allpay"
 
 #. Plugin URI of the plugin
 #: allpay-gateway.php
@@ -28,12 +27,8 @@ msgstr "https://www.allpay.co.il/integrations/wordpress"
 
 #. Description of the plugin
 #: allpay-gateway.php
-msgid ""
-"Allpay Payment Gateway for WooCommerce to accepts Visa, Mastercard, Diners, "
-"AmEx and other brands."
-msgstr ""
-"Платежныи шлюз Allpay для WooCommerce с поддержкои Visa, Mastercard, Diners, "
-"American Express и других брендов."
+msgid "Allpay payment gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands, and Apple Pay and Bit."
+msgstr "Платежный шлюз Allpay для WooCommerce с поддержкой Visa, Mastercard, Diners, American Express и других брендов, а также Apple Pay и Bit."
 
 #. Author of the plugin
 #: allpay-gateway.php
@@ -47,140 +42,144 @@ msgstr "https://allpay.co.il"
 
 #: allpay-gateway.php:55
 msgid "Settings"
-msgstr "Настроики"
+msgstr "Настройки"
 
-#: classes/class-allpay.php:22 classes/class-allpay.php:24
-#: classes/class-allpay.php:97
+#: classes/class-allpay.php:26
+#: classes/class-allpay.php:28
+#: classes/class-allpay.php:103
 msgid "Credit card payment via Allpay"
-msgstr "Оплата банковскои картои через Allpay"
+msgstr "Оплата банковской картой через Allpay"
 
-#: classes/class-allpay.php:23 classes/class-allpay.php:25
+#: classes/class-allpay.php:27
+#: classes/class-allpay.php:29
 msgid "Allpay payment gateway plug-in for WooCommerce"
 msgstr "Плагин платежного шлюза Allpay для WooCommerce"
 
-#: classes/class-allpay.php:87
-msgid "Enable / Disable"
-msgstr "Включить / выключить"
-
-#: classes/class-allpay.php:88
-msgid "Enable this payment gateway"
-msgstr "Включить этот платежныи шлюз"
-
 #: classes/class-allpay.php:93
+msgid "Enable / Disable"
+msgstr "Включить / отключить"
+
+#: classes/class-allpay.php:94
+msgid "Enable this payment gateway"
+msgstr "Включить этот платежный шлюз"
+
+#: classes/class-allpay.php:99
 msgid "Title"
 msgstr "Название"
 
-#: classes/class-allpay.php:95
+#: classes/class-allpay.php:101
 msgid "Payment method name shown to customers at checkout"
 msgstr "Название способа оплаты, отображаемое покупателям при оформлении заказа"
 
-#: classes/class-allpay.php:96
+#: classes/class-allpay.php:102
 msgid "Recommended: Credit card payment via Allpay"
 msgstr "Рекомендуется: оплата банковской картой через Allpay"
 
-#: classes/class-allpay.php:100
+#: classes/class-allpay.php:106
 msgid "Description"
 msgstr "Описание"
 
-#: classes/class-allpay.php:102
+#: classes/class-allpay.php:108
 msgid "Payment method description shown to customers at checkout"
 msgstr "Описание способа оплаты, отображаемое покупателям при оформлении заказа"
 
-#: classes/class-allpay.php:103
+#: classes/class-allpay.php:109
 msgid "Recommended: Pay securely with a credit/debit card, Apple Pay, or Bit"
 msgstr "Рекомендуется: безопасная оплата картой, Apple Pay или Bit"
 
-#: classes/class-allpay.php:104
+#: classes/class-allpay.php:110
 msgid "Pay securely with a credit/debit card, Apple Pay, or Bit."
 msgstr "Оплачивайте безопасно с помощью карты, Apple Pay или Bit."
 
-#: classes/class-allpay.php:108
+#: classes/class-allpay.php:114
 msgid "API login"
 msgstr "API логин"
 
-#: classes/class-allpay.php:110
-msgid "Allpay API Login"
-msgstr "API логин"
+#: classes/class-allpay.php:116
+msgid "Crate API Login in your Allpay account: Settings -> Integrations -> WordPress"
+msgstr "Создайте API логин в личном кабинете Allpay: Настройки → Интеграции → WordPress"
 
-#: classes/class-allpay.php:113
+#: classes/class-allpay.php:119
 msgid "API key"
 msgstr "API ключ"
 
-#: classes/class-allpay.php:115
-msgid "Allpay API Key"
-msgstr "API ключ"
+#: classes/class-allpay.php:121
+msgid "Crate API key in your Allpay account: Settings -> Integrations -> WordPress"
+msgstr "Создайте API ключ в личном кабинете Allpay: Настройки → Интеграции → WordPress"
 
-#: classes/class-allpay.php:118
+#: classes/class-allpay.php:124
 msgid "Installment max payments"
 msgstr "Максимальное количество платежей в рассрочку"
 
-#: classes/class-allpay.php:120
+#: classes/class-allpay.php:126
 msgid "Maximum number of installment payments. Up to 12, zero to disable"
 msgstr "Максимальное количество платежей в рассрочку. До 12, 0 — отключить"
 
-#: classes/class-allpay.php:121
-msgid ""
-"Allows client to choose number of payments. Valid for credit cards only (no "
-"debit cards)"
-msgstr ""
-"Позволяет покупателю выбрать количество платежей. Доступно только для "
-"кредитных карт (не дебетовых)"
+#: classes/class-allpay.php:127
+msgid "Allows client to choose number of payments. Valid for credit cards only (no debit cards)"
+msgstr "Позволяет клиенту выбрать количество платежей. Доступно только для кредитных карт (не для дебетовых)"
 
-#: classes/class-allpay.php:125
+#: classes/class-allpay.php:131
 msgid "Installment min order amount"
 msgstr "Минимальная сумма заказа для рассрочки"
 
-#: classes/class-allpay.php:127
+#: classes/class-allpay.php:133
 msgid "Minimum order amount for installments. Zero for orders of any amount"
-msgstr "Минимальная сумма заказа для рассрочки. 0 — без ограничении"
+msgstr "Минимальная сумма заказа для рассрочки. 0 — для заказов на любую сумму"
 
-#: classes/class-allpay.php:128
-msgid ""
-"Enables installment option when payment amount equals or above this value"
-msgstr ""
-"Включает возможность рассрочки, если сумма платежа равна или превышает "
-"указанное значение"
+#: classes/class-allpay.php:134
+msgid "Enables installment option when payment amount equals or above this value"
+msgstr "Включает возможность рассрочки, если сумма платежа равна или превышает указанное значение"
 
-#: classes/class-allpay.php:132
+#: classes/class-allpay.php:138
 msgid "Payment currency"
 msgstr "Валюта платежа"
 
-#: classes/class-allpay.php:134
-msgid ""
-"Before selecting USD or EUR, make sure these currencies are enabled on your "
-"Allpay account"
-msgstr ""
-"Перед выбором USD или EUR убедитесь, что эти валюты активированы в вашем "
-"аккаунте Allpay"
+#: classes/class-allpay.php:140
+msgid "Before selecting USD or EUR, make sure these currencies are enabled on your Allpay account"
+msgstr "Перед выбором USD или EUR убедитесь, что эти валюты активированы в вашем аккаунте Allpay"
 
-#: classes/class-allpay.php:135
-msgid ""
-"The currency in which the payment will be processed. Any price shown in "
-"another currency will be converted to this currency"
-msgstr ""
-"Валюта, в которои будет обработан платеж. Любая цена, указанная в другой "
-"валюте, будет автоматически сконвертирована"
+#: classes/class-allpay.php:141
+msgid "The currency in which the payment will be processed. Any price shown in another currency will be converted to this currency"
+msgstr "Валюта, в которой будет обработан платеж. Любая цена, указанная в другой валюте, будет сконвертирована в эту валюту"
 
-#: classes/class-allpay.php:138
+#: classes/class-allpay.php:144
 msgid "Israeli Shekel (ILS)"
-msgstr "Израильскии шекель (ILS)"
+msgstr "Израильский шекель (ILS)"
 
-#: classes/class-allpay.php:139
+#: classes/class-allpay.php:145
 msgid "US Dollar (USD)"
 msgstr "Доллар США (USD)"
 
-#: classes/class-allpay.php:140
+#: classes/class-allpay.php:146
 msgid "Euro (EUR)"
 msgstr "Евро (EUR)"
 
-#: classes/class-allpay.php:250
-msgid ""
-"We are currently experiencing problems trying to connect to this payment "
-"gateway. Sorry for the inconvenience."
-msgstr ""
-"В настоящее время возникают проблемы с подключением к платежному шлюзу. "
-"Приносим извинения за неудобства."
+#: classes/class-allpay.php:150
+msgid "Teudat zeut field"
+msgstr "Поле Teudat Zehut"
 
-#: classes/class-allpay.php:268
+#: classes/class-allpay.php:152
+#: classes/class-allpay.php:153
+msgid "Request Teudat Zehut (Israeli ID) on the payment page"
+msgstr "Запрашивать Teudat Zehut (израильский ID) на странице оплаты"
+
+#: classes/class-allpay.php:156
+msgid "Only for Israeli customers"
+msgstr "Только у покупателей из Израиля"
+
+#: classes/class-allpay.php:157
+msgid "For all customers"
+msgstr "У всех покупателей"
+
+#: classes/class-allpay.php:158
+msgid "Do not request"
+msgstr "Не запрашивать"
+
+#: classes/class-allpay.php:272
+msgid "We are currently experiencing problems trying to connect to this payment gateway. Sorry for the inconvenience."
+msgstr "В данный момент возникли проблемы с подключением к платежному шлюзу. Приносим извинения за неудобства."
+
+#: classes/class-allpay.php:290
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"

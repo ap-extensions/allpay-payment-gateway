@@ -149,12 +149,12 @@ class WC_Allpay extends WC_Payment_Gateway {
             'display_tehudat_mode' => array(
                 'title'       => __( 'Teudat zeut field', 'allpay-payment-gateway' ),
                 'type'        => 'select',
-                'description' => __( 'Request the teudat zeut on the payment form', 'allpay-payment-gateway' ),
-                'desc_tip'	=> __( 'Request the teudat zeut on the payment form', 'allpay-payment-gateway' ),
+                'description' => __( 'Request Teudat Zehut (Israeli ID) on the payment page', 'allpay-payment-gateway' ),
+                'desc_tip'	=> __( 'When customers should be asked to provide their Teudat Zehut number', 'allpay-payment-gateway' ),
                 'default'     => 2,
                 'options'     => array(
-                    1 => __( 'For Israeli citizens only', 'allpay-payment-gateway' ),
-                    2 => __( 'For all buyers', 'allpay-payment-gateway' ),
+                    1 => __( 'Only for customers from Israel', 'allpay-payment-gateway' ),
+                    2 => __( 'For all customers', 'allpay-payment-gateway' ),
                     0 => __( 'Do not request', 'allpay-payment-gateway' ),
                 ),
             )
