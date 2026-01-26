@@ -92,14 +92,16 @@ class WC_Allpay extends WC_Payment_Gateway {
 			'title' => array(
 				'title'		=> __( 'Title', 'allpay-payment-gateway' ),
 				'type'		=> 'text',
-				'desc_tip'	=> __( 'Payment title the customer will see during the checkout process.', 'allpay-payment-gateway' ),
-				'default'	=> __( 'Credit card', 'allpay-payment-gateway' ),
+				'description' => __( 'Payment method name shown to customers at checkout', 'allpay-payment-gateway' ),
+				'desc_tip'	=> __( 'Recommended: Credit card payment via Allpay', 'allpay-payment-gateway' ),
+				'default'	=> __( 'Credit card payment via Allpay', 'allpay-payment-gateway' ),
 			),
 			'description' => array(
 				'title'		=> __( 'Description', 'allpay-payment-gateway' ),
 				'type'		=> 'textarea',
-				'desc_tip'	=> __( 'Payment description the customer will see during the checkout process.', 'allpay-payment-gateway' ),
-				'default'	=> __( 'Pay securely using your credit card.', 'allpay-payment-gateway' ),
+				'description' => __( 'Payment method description shown to customers at checkout', 'allpay-payment-gateway' ),
+				'desc_tip'	=> __( 'Recommended: Pay securely with a credit/debit card, Apple Pay, or Bit', 'allpay-payment-gateway' ),
+				'default'	=> __( 'Pay securely with a credit/debit card, Apple Pay, or Bit.', 'allpay-payment-gateway' ),
 				'css'		=> 'max-width:350px;'
 			),
 			'api_login' => array(
