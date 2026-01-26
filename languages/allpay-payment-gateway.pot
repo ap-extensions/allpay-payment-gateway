@@ -23,7 +23,7 @@ msgid "https://www.allpay.co.il/integrations/woocommerce"
 msgstr ""
 
 #. Description of the plugin
-msgid "Allpay Payment Gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands. Fast payment with Bit included."
+msgid "Allpay payment gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands. Fast payment with Apple Pay and Bit included."
 msgstr ""
 
 #. Author of the plugin
