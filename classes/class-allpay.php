@@ -15,6 +15,8 @@ class WC_Allpay extends WC_Payment_Gateway {
     public $installment_n;
     public $installment_min_order;
 
+    public $display_tehudat_mode;
+
     public $currency_payment;
 
     public $debug;
@@ -40,6 +42,8 @@ class WC_Allpay extends WC_Payment_Gateway {
 
         $this->installment_n         = (int) $this->get_option( 'installment_n', 0 );
         $this->installment_min_order = (float) $this->get_option( 'installment_min_order', 1000 );
+
+        $this->display_tehudat_mode  = (int) $this->get_option( 'display_tehudat_mode', 2 );
 
         $this->currency_payment      = $this->get_option( 'currency_payment', 'ILS' );
 
@@ -141,6 +145,18 @@ class WC_Allpay extends WC_Payment_Gateway {
                     'USD' => __( 'US Dollar (USD)', 'allpay-payment-gateway' ),
                     'EUR' => __( 'Euro (EUR)', 'allpay-payment-gateway' ),
                 ),
+            ),
+            'display_tehudat_mode' => array(
+                'title'       => __( 'Teudat zeut field', 'allpay-payment-gateway' ),
+                'type'        => 'select',
+                'description' => __( 'Request the teudat zeut on the payment form', 'allpay-payment-gateway' ),
+                'desc_tip'	=> __( 'Request the teudat zeut on the payment form', 'allpay-payment-gateway' ),
+                'default'     => 2,
+                'options'     => array(
+                    1 => __( 'For Israeli citizens only', 'allpay-payment-gateway' ),
+                    2 => __( 'For all buyers', 'allpay-payment-gateway' ),
+                    0 => __( 'Do not request', 'allpay-payment-gateway' ),
+                ),
             )
 		);		
 	}
@@ -192,6 +208,10 @@ class WC_Allpay extends WC_Payment_Gateway {
 				$request['inst_fixed'] = 1;				
 			}
 		}
+
+        if($this->display_tehudat_mode == 0 || $this->display_tehudat_mode == 1 && $customer_order->get_billing_country() != 'IL') {
+            $request['client_tehudat'] = '000000000';
+        }
 
         $tax_included = wc_tax_enabled() && wc_prices_include_tax() && $customer_order->get_total_tax() > 0;
 
