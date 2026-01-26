@@ -17,6 +17,8 @@ class WC_Allpay extends WC_Payment_Gateway {
 
     public $currency_payment;
 
+    public $debug;
+
 	function __construct() {
 		$this->id = "allpay-payment-gateway";
 		$this->method_title = __( 'Credit card payment via Allpay', 'allpay-payment-gateway' );
@@ -59,7 +61,7 @@ class WC_Allpay extends WC_Payment_Gateway {
         }
 
 		$chunks = [];
-		$wh_params = ['name', 'items', 'amount', 'order_id', 'currency', 'status', 'client_name', 
+		$wh_params = ['name', 'items', 'amount', 'inst', 'order_id', 'currency', 'status', 'client_name', 
             'client_email', 'client_tehudat', 'client_phone', 'card_mask', 'card_brand', 'foreign_card', 
             'add_field_1', 'add_field_2', 'receipt'];
 		foreach($wh_params as $k) {
@@ -76,7 +78,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 			$transaction_id = (int)$_REQUEST['order_id'];
 			$customer_order->payment_complete($transaction_id);
 		} else {
-			echo 'Notification error: ' . json_encode($_REQUEST) . ' / ' . $sign;
+			echo 'Notification error: ' . json_encode($_REQUEST) . ' / ' . $sign . ' / ' . $this->debug;
 		}
 		exit();
 	}
@@ -292,7 +294,7 @@ class WC_Allpay extends WC_Payment_Gateway {
                 $chunks[] = $v; 
             }	                
         }
-        
+        $this->debug = implode(':', $chunks);
         $signature = implode(':', $chunks) . ':' . $this->api_key;
         $signature = hash('sha256', $signature);
         return $signature;  
