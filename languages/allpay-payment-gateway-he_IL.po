@@ -1,151 +1,178 @@
-# Copyright (C) 2023 Allpay
+# Copyright (C) 2026 Allpay
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Allpay payment gateway 1.0.2\n"
+"Project-Id-Version: Allpay payment gateway 1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/allpay-payment-"
-"gateway.1.0.2\n"
-"POT-Creation-Date: 2023-07-19T19:35:49+03:00\n"
-"PO-Revision-Date: 2023-07-19 21:02+0300\n"
+"gateway\n"
+"POT-Creation-Date: 2026-01-26T08:47:32+00:00\n"
+"PO-Revision-Date: 2026-01-26 11:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.8\n"
 "X-Domain: allpay-payment-gateway\n"
 
 #. Plugin Name of the plugin
+#: allpay-gateway.php
 msgid "Allpay payment gateway"
-msgstr "שער תשלום של Allpay"
+msgstr "שער תשלומים Allpay"
 
 #. Plugin URI of the plugin
-msgid "https://www.allpay.co.il/integrations/woocommerce"
-msgstr ""
+#: allpay-gateway.php
+msgid "https://www.allpay.co.il/integrations/wordpress"
+msgstr "https://www.allpay.co.il/integrations/wordpress"
 
 #. Description of the plugin
-msgid "Allpay Payment Gateway for WooCommerce."
-msgstr "שער תשלום של Allpay לWooCommerce."
+#: allpay-gateway.php
+msgid ""
+"Allpay Payment Gateway for WooCommerce to accepts Visa, Mastercard, Diners, "
+"AmEx and other brands."
+msgstr ""
+"שער התשלומים Allpay ל־WooCommerce תומך בכרטיסי Visa, Mastercard, Diners, "
+"American Express ומותגים נוספים."
 
 #. Author of the plugin
+#: allpay-gateway.php
 msgid "Allpay"
-msgstr ""
+msgstr "Allpay"
 
 #. Author URI of the plugin
+#: allpay-gateway.php
 msgid "https://allpay.co.il"
-msgstr ""
+msgstr "https://allpay.co.il"
 
-#: allpay-gateway.php:47
+#: allpay-gateway.php:55
 msgid "Settings"
 msgstr "הגדרות"
 
-#: allpay.php:12 allpay.php:16
-msgid "Bank cards payments Allpay"
-msgstr "תשלום בכרטיסי בנק דרך Allpay"
+#: classes/class-allpay.php:22 classes/class-allpay.php:24
+#: classes/class-allpay.php:97
+msgid "Credit card payment via Allpay"
+msgstr "תשלום בכרטיס אשראי באמצעות Allpay"
 
-#: allpay.php:14
-msgid "Allpay Payment Gateway Plug-in for WooCommerce"
-msgstr "פלאגין שער תשלום של Allpay עבור WooCommerce"
+#: classes/class-allpay.php:23 classes/class-allpay.php:25
+msgid "Allpay payment gateway plug-in for WooCommerce"
+msgstr "תוסף שער התשלומים Allpay ל־WooCommerce"
 
-#: allpay.php:55
+#: classes/class-allpay.php:87
 msgid "Enable / Disable"
-msgstr "להפעיל / לכבות"
+msgstr "הפעלה / השבתה"
 
-#: allpay.php:56
+#: classes/class-allpay.php:88
 msgid "Enable this payment gateway"
-msgstr "הפעל את אמצעי התשלום הזה"
+msgstr "הפעל שער תשלומים זה"
 
-#: allpay.php:61
+#: classes/class-allpay.php:93
 msgid "Title"
 msgstr "כותרת"
 
-#: allpay.php:63
-msgid "Payment title the customer will see during the checkout process."
-msgstr "כותרת התשלום שהקונה יראה בעת ביצוע ההזמנה."
+#: classes/class-allpay.php:95
+msgid "Payment method name shown to customers at checkout"
+msgstr "שם אמצעי התשלום המוצג ללקוחות בעמוד התשלום"
 
-#: allpay.php:64
-msgid "Credit card"
-msgstr "כרטיס אשראי"
+#: classes/class-allpay.php:96
+msgid "Recommended: Credit card payment via Allpay"
+msgstr "מומלץ: תשלום בכרטיס אשראי באמצעות Allpay"
 
-#: allpay.php:67
+#: classes/class-allpay.php:100
 msgid "Description"
 msgstr "תיאור"
 
-#: allpay.php:69
-msgid "Payment description the customer will see during the checkout process."
-msgstr "תיאור התשלום שיראה הקונה בעת ביצוע ההזמנה."
+#: classes/class-allpay.php:102
+msgid "Payment method description shown to customers at checkout"
+msgstr "תיאור אמצעי התשלום המוצג ללקוחות בעמוד התשלום"
 
-#: allpay.php:70
-msgid "Pay securely using your credit card."
-msgstr "שלם בצורה מאובטחת עם כרטיס האשראי שלך."
+#: classes/class-allpay.php:103
+msgid "Recommended: Pay securely with a credit/debit card, Apple Pay, or Bit"
+msgstr "מומלץ: תשלום מאובטח בכרטיס אשראי/דביט, Apple Pay או Bit"
 
-#: allpay.php:74
+#: classes/class-allpay.php:104
+msgid "Pay securely with a credit/debit card, Apple Pay, or Bit."
+msgstr "שלם בצורה מאובטחת באמצעות כרטיס אשראי/דביט, Apple Pay או Bit."
+
+#: classes/class-allpay.php:108
 msgid "API login"
 msgstr "שם משתמש API"
 
-#: allpay.php:76
+#: classes/class-allpay.php:110
 msgid "Allpay API Login"
-msgstr "שם משתמש API בAllpay"
+msgstr "שם משתמש API של Allpay"
 
-#: allpay.php:79
+#: classes/class-allpay.php:113
 msgid "API key"
 msgstr "מפתח API"
 
-#: allpay.php:81
+#: classes/class-allpay.php:115
 msgid "Allpay API Key"
-msgstr "מפתח API בAllpay"
+msgstr "מפתח API של Allpay"
 
-#: allpay.php:84
+#: classes/class-allpay.php:118
 msgid "Installment max payments"
-msgstr "תשלומים מקסימליים"
+msgstr "מספר תשלומים מקסימלי"
 
-#: allpay.php:86
-msgid "Maximum number of installment payments. Up to 12, zero to disable."
-msgstr "מספר מקסימלי של תשלומים. עד 12, אפס כדי להשבית."
+#: classes/class-allpay.php:120
+msgid "Maximum number of installment payments. Up to 12, zero to disable"
+msgstr "מספר תשלומים מקסימלי. עד 12, 0 לביטול האפשרות"
 
-#: allpay.php:87
+#: classes/class-allpay.php:121
 msgid ""
 "Allows client to choose number of payments. Valid for credit cards only (no "
 "debit cards)"
 msgstr ""
-"מאפשר ללקוח לבחור מספר תשלומים. עובד עבור כרטיסי אשראי בלבד (ללא כרטיסי "
-"דיירכט)"
+"מאפשר ללקוח לבחור את מספר התשלומים. זמין לכרטיסי אשראי בלבד (לא כרטיסי דביט)"
 
-#: allpay.php:91
+#: classes/class-allpay.php:125
 msgid "Installment min order amount"
-msgstr "סכום הזמנה מינימלי בתשלומים"
+msgstr "סכום מינימלי להזמנה בתשלומים"
 
-#: allpay.php:93
-msgid "Minimum order amount for installments. Zero for orders of any amount."
-msgstr "מינימום הזמנה בתשלומים. אפס עבור הזמנות בכל סכום."
+#: classes/class-allpay.php:127
+msgid "Minimum order amount for installments. Zero for orders of any amount"
+msgstr "סכום הזמנה מינימלי לתשלומים. 0 ללא הגבלה"
 
-#: allpay.php:94
+#: classes/class-allpay.php:128
 msgid ""
 "Enables installment option when payment amount equals or above this value"
-msgstr "מפעיל את אפשרות התשלומים כאשר סכום התשלום שווה או גדול מערך זה"
+msgstr "מאפשר תשלומים כאשר סכום התשלום שווה או גבוה מערך זה"
 
-#: allpay.php:98
-msgid "First payment amount"
-msgstr "סכום התשלום הראשון"
+#: classes/class-allpay.php:132
+msgid "Payment currency"
+msgstr "מטבע התשלום"
 
-#: allpay.php:100
-msgid "First Installment payment. Zero for auto."
-msgstr "סכום התשלום הראשון. אפס לחישוב אוטומטי."
-
-#: allpay.php:101
+#: classes/class-allpay.php:134
 msgid ""
-"Makes first payment amount fixed. If set to 0, the system will calculate the "
-"first payment"
-msgstr "קובע את סכום התשלום הראשון. אם מוגדר ל-0, המערכת תחשב את התשלום הראשון"
+"Before selecting USD or EUR, make sure these currencies are enabled on your "
+"Allpay account"
+msgstr "לפני בחירת USD או EUR, ודא שמטבעות אלו מופעלים בחשבון Allpay שלך"
 
-#: allpay.php:146
+#: classes/class-allpay.php:135
+msgid ""
+"The currency in which the payment will be processed. Any price shown in "
+"another currency will be converted to this currency"
+msgstr ""
+"המטבע שבו התשלום יעובד. כל מחיר המוצג במטבע אחר יומר אוטומטית למטבע זה"
+
+#: classes/class-allpay.php:138
+msgid "Israeli Shekel (ILS)"
+msgstr "שקל ישראלי (ILS)"
+
+#: classes/class-allpay.php:139
+msgid "US Dollar (USD)"
+msgstr "דולר אמריקאי (USD)"
+
+#: classes/class-allpay.php:140
+msgid "Euro (EUR)"
+msgstr "אירו (EUR)"
+
+#: classes/class-allpay.php:250
 msgid ""
 "We are currently experiencing problems trying to connect to this payment "
 "gateway. Sorry for the inconvenience."
-msgstr ""
-"אנו נתקלים כעת בבעיות בניסיון להתחבר לשער תשלום זה.אנו מצטערים על אי הנוחות."
+msgstr "אנו חווים כעת בעיות בהתחברות לשער התשלומים. אנו מתנצלים על אי הנוחות."
 
-#: allpay.php:149
-msgid "Allpay's Response was empty."
-msgstr "תגובה ריקה משער התשלום."
+#: classes/class-allpay.php:268
+msgid "Unknown error"
+msgstr "שגיאה לא ידועה"
