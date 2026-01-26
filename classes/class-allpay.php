@@ -181,7 +181,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 			"client_email"			=> $customer_order->get_billing_email(),
 			"notifications_url"		=> get_home_url() . '/?wc-api=allpay',
 			"success_url"			=> $customer_order->get_checkout_order_received_url(),
-			"backlink_url"			=> home_url()
+			"backlink_url"			=> wc_get_checkout_url()
 		);
 
 		if($this->installment_n > 0 && ((int)$this->installment_min_order == 0 || $this->installment_min_order <= $customer_order->get_total())) {
@@ -280,15 +280,15 @@ class WC_Allpay extends WC_Payment_Gateway {
                     if (is_array($item)) {
                         ksort($item);
                         foreach($item as $name => $val) {
-                            if ($val !== '') {
+                            if ($val !== null && $val !== '') {
                                 $chunks[] = $val; 
                             }	 
                         }
-                    } elseif ($item !== '') {
+                    } elseif ($item !== null && $item !== '') {
                         $chunks[] = $item; 
                     }	   
                 }
-            } elseif ($v !== '') {
+            } elseif ($v !== null && $v !== '') {
                 $chunks[] = $v; 
             }	                
         }
