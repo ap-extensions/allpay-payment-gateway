@@ -113,12 +113,12 @@ class WC_Allpay extends WC_Payment_Gateway {
 			'api_login' => array(
 				'title'		=> __( 'API login', 'allpay-payment-gateway' ),
 				'type'		=> 'text',
-				'desc_tip'	=> __( 'Allpay API Login', 'allpay-payment-gateway' ),
+				'desc_tip'	=> __( 'Crate API Login in your Allpay account: Settings -> Integrations -> WordPress', 'allpay-payment-gateway' ),
 			),
 			'api_key' => array(
 				'title'		=> __( 'API key', 'allpay-payment-gateway' ),
 				'type'		=> 'password',
-				'desc_tip'	=> __( 'Allpay API Key', 'allpay-payment-gateway' ),
+				'desc_tip'	=> __( 'Crate API key in your Allpay account: Settings -> Integrations -> WordPress', 'allpay-payment-gateway' ),
 			),
 			'installment_n' => array(
 				'title' => __( 'Installment max payments', 'allpay-payment-gateway' ),

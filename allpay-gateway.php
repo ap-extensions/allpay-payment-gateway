@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Allpay payment gateway
  * Plugin URI: https://www.allpay.co.il/integrations/wordpress
- * Description: Allpay Payment Gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands.
+ * Description: Allpay payment gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands, and Apple Pay and Bit.
  * Author: Allpay
  * Author URI: https://allpay.co.il
  * Version: 1.2

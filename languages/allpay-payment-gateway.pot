@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: allpay-gateway.php
-msgid "Allpay Payment Gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands."
+msgid "Allpay payment gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands."
 msgstr ""
 
 #. Author of the plugin
