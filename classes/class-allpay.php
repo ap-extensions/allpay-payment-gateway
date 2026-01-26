@@ -19,10 +19,10 @@ class WC_Allpay extends WC_Payment_Gateway {
 
 	function __construct() {
 		$this->id = "allpay-payment-gateway";
-		$this->method_title = __( 'Bank cards payments via Allpay', 'allpay-payment-gateway' );
-		$this->method_description = __( 'Allpay Payment Gateway Plug-in for WooCommerce', 'allpay-payment-gateway' );
-		$this->title = __( 'Bank cards payments via Allpay', 'allpay-payment-gateway' );
-		$this->description = __( 'Allpay Payment Gateway Plug-in for WooCommerce', 'allpay-payment-gateway' );
+		$this->method_title = __( 'Credit card payment via Allpay', 'allpay-payment-gateway' );
+		$this->method_description = __( 'Allpay payment gateway plug-in for WooCommerce', 'allpay-payment-gateway' );
+		$this->title = __( 'Credit card payment via Allpay', 'allpay-payment-gateway' );
+		$this->description = __( 'Allpay payment gateway plug-in for WooCommerce', 'allpay-payment-gateway' );
 		$this->icon = null;
 		$this->has_fields = true;
 
