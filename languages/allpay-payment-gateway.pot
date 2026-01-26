@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-26T08:47:32+00:00\n"
+"POT-Creation-Date: 2026-01-26T12:46:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: allpay-payment-gateway\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: allpay-gateway.php
-msgid "Allpay payment gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands."
+msgid "Allpay payment gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands, and Apple Pay and Bit."
 msgstr ""
 
 #. Author of the plugin
@@ -43,121 +43,142 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: classes/class-allpay.php:22
-#: classes/class-allpay.php:24
-#: classes/class-allpay.php:97
+#: classes/class-allpay.php:26
+#: classes/class-allpay.php:28
+#: classes/class-allpay.php:103
 msgid "Credit card payment via Allpay"
 msgstr ""
 
-#: classes/class-allpay.php:23
-#: classes/class-allpay.php:25
+#: classes/class-allpay.php:27
+#: classes/class-allpay.php:29
 msgid "Allpay payment gateway plug-in for WooCommerce"
 msgstr ""
 
-#: classes/class-allpay.php:87
+#: classes/class-allpay.php:93
 msgid "Enable / Disable"
 msgstr ""
 
-#: classes/class-allpay.php:88
+#: classes/class-allpay.php:94
 msgid "Enable this payment gateway"
 msgstr ""
 
-#: classes/class-allpay.php:93
+#: classes/class-allpay.php:99
 msgid "Title"
 msgstr ""
 
-#: classes/class-allpay.php:95
+#: classes/class-allpay.php:101
 msgid "Payment method name shown to customers at checkout"
 msgstr ""
 
-#: classes/class-allpay.php:96
+#: classes/class-allpay.php:102
 msgid "Recommended: Credit card payment via Allpay"
 msgstr ""
 
-#: classes/class-allpay.php:100
+#: classes/class-allpay.php:106
 msgid "Description"
 msgstr ""
 
-#: classes/class-allpay.php:102
+#: classes/class-allpay.php:108
 msgid "Payment method description shown to customers at checkout"
 msgstr ""
 
-#: classes/class-allpay.php:103
+#: classes/class-allpay.php:109
 msgid "Recommended: Pay securely with a credit/debit card, Apple Pay, or Bit"
 msgstr ""
 
-#: classes/class-allpay.php:104
+#: classes/class-allpay.php:110
 msgid "Pay securely with a credit/debit card, Apple Pay, or Bit."
 msgstr ""
 
-#: classes/class-allpay.php:108
+#: classes/class-allpay.php:114
 msgid "API login"
 msgstr ""
 
-#: classes/class-allpay.php:110
-msgid "Allpay API Login"
+#: classes/class-allpay.php:116
+msgid "Crate API Login in your Allpay account: Settings -> Integrations -> WordPress"
 msgstr ""
 
-#: classes/class-allpay.php:113
+#: classes/class-allpay.php:119
 msgid "API key"
 msgstr ""
 
-#: classes/class-allpay.php:115
-msgid "Allpay API Key"
+#: classes/class-allpay.php:121
+msgid "Crate API key in your Allpay account: Settings -> Integrations -> WordPress"
 msgstr ""
 
-#: classes/class-allpay.php:118
+#: classes/class-allpay.php:124
 msgid "Installment max payments"
 msgstr ""
 
-#: classes/class-allpay.php:120
+#: classes/class-allpay.php:126
 msgid "Maximum number of installment payments. Up to 12, zero to disable"
 msgstr ""
 
-#: classes/class-allpay.php:121
+#: classes/class-allpay.php:127
 msgid "Allows client to choose number of payments. Valid for credit cards only (no debit cards)"
 msgstr ""
 
-#: classes/class-allpay.php:125
+#: classes/class-allpay.php:131
 msgid "Installment min order amount"
 msgstr ""
 
-#: classes/class-allpay.php:127
+#: classes/class-allpay.php:133
 msgid "Minimum order amount for installments. Zero for orders of any amount"
 msgstr ""
 
-#: classes/class-allpay.php:128
+#: classes/class-allpay.php:134
 msgid "Enables installment option when payment amount equals or above this value"
 msgstr ""
 
-#: classes/class-allpay.php:132
+#: classes/class-allpay.php:138
 msgid "Payment currency"
 msgstr ""
 
-#: classes/class-allpay.php:134
+#: classes/class-allpay.php:140
 msgid "Before selecting USD or EUR, make sure these currencies are enabled on your Allpay account"
 msgstr ""
 
-#: classes/class-allpay.php:135
+#: classes/class-allpay.php:141
 msgid "The currency in which the payment will be processed. Any price shown in another currency will be converted to this currency"
 msgstr ""
 
-#: classes/class-allpay.php:138
+#: classes/class-allpay.php:144
 msgid "Israeli Shekel (ILS)"
 msgstr ""
 
-#: classes/class-allpay.php:139
+#: classes/class-allpay.php:145
 msgid "US Dollar (USD)"
 msgstr ""
 
-#: classes/class-allpay.php:140
+#: classes/class-allpay.php:146
 msgid "Euro (EUR)"
 msgstr ""
 
-#: classes/class-allpay.php:250
+#: classes/class-allpay.php:150
+msgid "Teudat zeut field"
+msgstr ""
+
+#: classes/class-allpay.php:152
+#: classes/class-allpay.php:153
+msgid "Request the teudat zeut on the payment form"
+msgstr ""
+
+#: classes/class-allpay.php:156
+msgid "For Israeli citizens only"
+msgstr ""
+
+#: classes/class-allpay.php:157
+msgid "For all buyers"
+msgstr ""
+
+#: classes/class-allpay.php:158
+msgid "Do not request"
+msgstr ""
+
+#: classes/class-allpay.php:272
 msgid "We are currently experiencing problems trying to connect to this payment gateway. Sorry for the inconvenience."
 msgstr ""
 
-#: classes/class-allpay.php:268
+#: classes/class-allpay.php:290
 msgid "Unknown error"
 msgstr ""
