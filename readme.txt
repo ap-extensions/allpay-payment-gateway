@@ -63,7 +63,7 @@ Same day.
 On the 6th day of each month, with an option for weekly credits.
 
 == Changelog ==
-= 1.2 – 26 January 2026 =
+= 1.2 – 27 January 2026 =
 * New: Payment currency selector added to plugin settings.
 * New: Currency converter: show prices in a customer-friendly currency while charging in ILS, USD, or EUR.
 * New: Tehudat Zehut (Israeli ID) field control
