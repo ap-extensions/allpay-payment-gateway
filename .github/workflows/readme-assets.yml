@@ -1,0 +1,39 @@
+# Update readme.txt and the directory page assets (icons, screenshots) without a new release —
+# e.g. after bumping "Tested up to". Runs on push to main when only those files changed.
+# Code changes are NOT published here: they go out only with a version tag (deploy.yml).
+name: Update readme and assets on WordPress.org
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'readme.txt'
+      - '.wordpress-org/**'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # A changed "Stable tag" means a release commit: deploy.yml publishes it from the version tag
+      - name: Skip release commits
+        id: guard
+        run: |
+          LOCAL=$(grep -m1 -E '^Stable tag:' readme.txt | tr -d '\r' | sed -E 's/^Stable tag:\s*//; s/\s+$//')
+          LIVE=$(curl -fsS https://plugins.svn.wordpress.org/allpay-payment-gateway/trunk/readme.txt | grep -m1 -E '^Stable tag:' | tr -d '\r' | sed -E 's/^Stable tag:\s*//; s/\s+$//')
+          echo "local=$LOCAL live=$LIVE"
+          if [ "$LOCAL" != "$LIVE" ]; then
+            echo "::notice::Stable tag $LIVE -> $LOCAL: release commit, skipped (published by the version tag)"
+            echo "skip=1" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update readme / assets
+        if: steps.guard.outputs.skip != '1'
+        uses: 10up/action-wordpress-plugin-asset-update@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: allpay-payment-gateway
+          IGNORE_OTHER_FILES: true

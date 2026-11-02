@@ -1,0 +1,44 @@
+# Release to the WordPress.org plugin directory.
+# Triggered by pushing a version tag (e.g. `git tag 1.2.1 && git push origin 1.2.1`):
+# trunk is replaced with this commit, tags/<version> is created, .wordpress-org/ goes to assets/.
+name: Deploy to WordPress.org
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The tag, the plugin header and readme.txt must name the same version, and the changelog must have it
+      - name: Check version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          HEADER=$(grep -m1 -E '^\s*\*\s*Version:' allpay-gateway.php | tr -d '\r' | sed -E 's/.*Version:\s*//; s/\s+$//')
+          STABLE=$(grep -m1 -E '^Stable tag:' readme.txt | tr -d '\r' | sed -E 's/^Stable tag:\s*//; s/\s+$//')
+          echo "tag=$TAG header=$HEADER stable=$STABLE"
+          [ "$TAG" = "$HEADER" ] || { echo "::error::Version in allpay-gateway.php ($HEADER) != tag ($TAG)"; exit 1; }
+          [ "$TAG" = "$STABLE" ] || { echo "::error::Stable tag in readme.txt ($STABLE) != tag ($TAG)"; exit 1; }
+          grep -qF -- "= $TAG " readme.txt ||{ echo "::error::No changelog entry '= $TAG ...' in readme.txt"; exit 1; }
+          echo "VERSION=$TAG" >> "$GITHUB_ENV"
+
+      # .mo files are built from .po here, so the release never ships stale translations
+      - name: Compile translations
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq gettext
+          for po in languages/*.po; do
+            msgfmt --check -o "${po%.po}.mo" "$po"
+          done
+          ls -l languages
+
+      - name: Deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: allpay-payment-gateway
+          VERSION: ${{ env.VERSION }}
