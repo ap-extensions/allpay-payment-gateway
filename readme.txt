@@ -8,12 +8,12 @@ Stable tag: 1.2.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-With this plugin for WooCommerce, businesses in Israel can receive payments from all over the world (except for Russia). Supported card brands: Visa, Mastercard, American Express, Diners, and Isracard. The plugin was developed by [Allpay Payment Service](https://www.allpay.co.il/).
+Accept Visa, Mastercard, Amex, Diners, Isracard, Apple Pay, Google Pay and Bit in WooCommerce. Payouts to an Israeli bank, installments, invoices.
 
 == Description ==
 The plugin allows you to accept online payments from all over the world (except for the Russian Federation) with funds credited to a bank account in Israel. Cards of major brands are supported: Visa, Mastercard, American Express, Diners, Discover, and JCB.
 
-The plugin supports Apple Pay and Bit.
+The plugin supports Apple Pay, Google Pay and Bit.
 
 It also supports installments and digital invoices.
 
@@ -30,7 +30,7 @@ Payments are made via a secure channel, ensuring safety for the customer and tra
 1. Low commission.
 2. Support via email, Telegram, and WhatsApp.
 3. Supported cards: Visa, Mastercard, American Express, Diners, Isracard, JCB.
-4. Fast payment buttons: Apple Pay and Bit.
+4. Fast payment buttons: Apple Pay, Google Pay and Bit.
 5. Payments from all countries (except the Russian Federation).
 6. Installments (tashlumim).
 7. Integration with digital receipts.
