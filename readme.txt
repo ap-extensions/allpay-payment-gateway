@@ -74,6 +74,7 @@ On the 6th day of each month, with an option for weekly credits.
 
 = 1.1.3 - 22 SEPTEMBER 2025 =
 * New: VAT calculation support.
+* Fix: Inclusion of taxes in payment.
 
 = 1.1.2 - 31 AUGUST 2025 =
 * Fix: Order status wasn’t always changing to paid.
@@ -94,6 +95,3 @@ On the 6th day of each month, with an option for weekly credits.
 
 = 1.0.2 - THURSDAY, 10TH AUGUST 2023 =
 * Improvement: Tested with WordPress v6.3.
-
-= 1.1.3 - THURSDAY, 10TH SEPTEMBER 2025 =
-* Fix: inclusion of taxes in payment
