@@ -1,10 +1,10 @@
 === Allpay Payment Gateway ===
 Contributors: Allpay
 Tags: payment provider, Israel, платежная система, Израиль, Allpay
-Requires PHP: 5.6
+Requires PHP: 7.0
 Requires at least: 4.7
-Tested up to: 6.9
-Stable tag: 1.2.0
+Tested up to: 7.1.4
+Stable tag: 1.3.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,12 @@ Same day.
 On the 6th day of each month, with an option for weekly credits.
 
 == Changelog ==
+= 1.3.0 – 9 November 2026 =
+* New: Switched to Allpay API v15.
+* New: Payment requests are sent as JSON.
+* Fix: Webhook signature is now verified over all fields (signature v2), so orders are reliably marked as paid.
+* Fix: Pre-authorized (held) payments are no longer marked as paid.
+
 = 1.2.0 – 27 January 2026 =
 * New: Payment currency selector added to plugin settings.
 * New: Currency converter: show prices in a customer-friendly currency while charging in ILS, USD, or EUR.
