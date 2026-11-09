@@ -5,11 +5,11 @@
  * Description: Allpay payment gateway for WooCommerce to accepts Visa, Mastercard, Diners, AmEx and other brands, and Apple Pay and Bit.
  * Author: Allpay
  * Author URI: https://allpay.co.il
- * Version: 1.2.0
+ * Version: 1.3.0
  * Text Domain: allpay-payment-gateway
  * Domain Path: /languages
- * Tested up to: 6.9
- * WC tested up to: 9.8.6
+ * Tested up to: 7.1.4
+ * WC tested up to: 11.2.1
  * WC requires at least: 3.0
  *
  * License: GPLv2 or later

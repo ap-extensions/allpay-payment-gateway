@@ -19,8 +19,6 @@ class WC_Allpay extends WC_Payment_Gateway {
 
     public $currency_payment;
 
-    public $debug;
-
 	function __construct() {
 		$this->id = "allpay-payment-gateway";
 		$this->method_title = __( 'Credit card payment via Allpay', 'allpay-payment-gateway' );
@@ -56,35 +54,25 @@ class WC_Allpay extends WC_Payment_Gateway {
 
 	public function webhook() {  
 
-        $inputJSON = file_get_contents('php://input'); 
-        $input = json_decode($inputJSON, true); 
-        if(is_array($input)) { 
-            foreach($input as $k => $v) { 
-                $_REQUEST[$k] = $v; 
-            } 
+        $input = json_decode( file_get_contents('php://input'), true );
+        if ( ! is_array( $input ) ) {
+            $input = [];
         }
 
-		$chunks = [];
-		$wh_params = ['name', 'items', 'amount', 'inst', 'order_id', 'currency', 'status', 'client_name', 
-            'client_email', 'client_tehudat', 'client_phone', 'card_mask', 'card_brand', 'foreign_card', 
-            'add_field_1', 'add_field_2', 'receipt'];
-		foreach($wh_params as $k) {
-			if(isset($_REQUEST[$k])) {
-				$chunks[$k] = $_REQUEST[$k];
-			}
-		} 
-		$sign = $this->get_signature($chunks); 
+        $sign     = ( isset( $input['sign'] ) && is_string( $input['sign'] ) ) ? $input['sign'] : '';
+        $order_id = $input['order_id'] ?? '';
+        $status   = (int) ( $input['status'] ?? 0 );
 
-		$order_id = $_REQUEST['order_id'];
-		$status = (int)$_REQUEST['status'];
-		if($order_id > 0 && $status == 1 && $sign == $_REQUEST['sign']) {
-			$customer_order = wc_get_order($order_id);
-			$transaction_id = (int)$_REQUEST['order_id'];
-			$customer_order->payment_complete($transaction_id);
-		} else {
-			echo 'Notification error: ' . json_encode($_REQUEST) . ' / ' . $sign . ' / ' . $this->debug;
-		}
-		exit();
+        if ( $sign !== '' && hash_equals( $this->get_signature( $input ), $sign )
+                && $order_id > 0 && $status == 1 && empty( $input['preauth'] ) ) {
+            $customer_order = wc_get_order( $order_id );
+            if ( $customer_order ) {
+                $customer_order->payment_complete( (int) $order_id );
+            }
+        } else {
+            echo 'Notification error: ' . json_encode( $input );
+        }
+        exit();
 	}
 
 	public function init_form_fields() {
@@ -165,7 +153,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 
 		$customer_order = wc_get_order( $order_id );
 
-		$environment_url = 'https://allpay.to/app/?show=getpayment&mode=api10';
+		$environment_url = 'https://allpay.to/app/?show=getpayment&mode=api15';
 		
 		$user_id = get_current_user_id();
 
@@ -190,7 +178,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 		$request = array(
 			"login"           		=> $this->api_login,
 			"amount"             	=> $customer_order->get_total(),
-			"currency"				=> ($this->currency_payment ?? 'ILS'),
+			"currency_payment"		=> ($this->currency_payment ?: 'ILS'),
             "currency_display"      => get_woocommerce_currency(),
 			"lang"					=> $this->get_lang(),
 			"order_id"        		=> str_replace( "#", "", $customer_order->get_order_number() ),
@@ -260,11 +248,12 @@ class WC_Allpay extends WC_Payment_Gateway {
 
         $request['items'] = $items;
 
-		$request['sign'] = $this->get_signature($request);
-	
+		$request['sign'] = $this->get_signature( $request );
+
 		$response = wp_remote_post( $environment_url, array(
 			'method'    => 'POST',
-			'body'      => http_build_query( $request ),
+			'headers'   => array( 'Content-Type' => 'application/json' ),
+			'body'      => wp_json_encode( $request ),
 			'timeout'   => 90,
 			'sslverify' => false,
 		) );
@@ -290,35 +279,54 @@ class WC_Allpay extends WC_Payment_Gateway {
 		throw new Exception( __( 'Unknown error', 'allpay-payment-gateway' ) );
 	}
 
-    public function get_signature($params) {    
-        ksort($params);
+    public function get_signature( $params ) {
+        $skip = [ 'sign', 'uri', 'show', 'act', 'mode', 'payment_id', 'paypage_id' ];
+        ksort( $params );
         $chunks = [];
 
-        foreach ($params as $k => $v) { 
-            if (is_array($v)) {
-                ksort($v);
-
-                foreach ($v as $subkey => $item) {
-                    if (is_array($item)) {
-                        ksort($item);
-                        foreach($item as $name => $val) {
-                            if ($val !== null && $val !== '') {
-                                $chunks[] = $val; 
-                            }	 
+        foreach ( $params as $k => $v ) {
+            if ( is_array( $v ) ) {
+                ksort( $v );
+                foreach ( $v as $item ) {
+                    if ( is_array( $item ) ) {
+                        ksort( $item );
+                        foreach ( $item as $val ) {
+                            if ( $val !== '' && $val !== null ) {
+                                $chunks[] = $this->sign_value( $val );
+                            }
                         }
-                    } elseif ($item !== null && $item !== '') {
-                        $chunks[] = $item; 
-                    }	   
+                    } elseif ( $item !== '' && $item !== null ) {
+                        $chunks[] = $this->sign_value( $item );
+                    }
                 }
-            } elseif ($v !== null && $v !== '') {
-                $chunks[] = $v; 
-            }	                
+            } elseif ( $v !== '' && $v !== null && ! in_array( $k, $skip, true ) ) {
+                $chunks[] = $this->sign_value( $v );
+            }
         }
-        $this->debug = implode(':', $chunks);
-        $signature = implode(':', $chunks) . ':' . $this->api_key;
-        $signature = hash('sha256', $signature);
-        return $signature;  
-    }  
+
+        return hash( 'sha256', implode( ':', $chunks ) . ':' . $this->api_key );
+    }
+
+    private function sign_value( $v ) {
+        if ( $v === true ) {
+            return '1';
+        }
+        if ( $v === false ) {
+            return '0';
+        }
+        if ( is_float( $v ) && is_finite( $v ) ) {
+            $prev = ini_get( 'serialize_precision' );
+            if ( $prev !== '-1' ) {
+                ini_set( 'serialize_precision', '-1' );
+            }
+            $s = json_encode( $v );
+            if ( $prev !== '-1' ) {
+                ini_set( 'serialize_precision', $prev );
+            }
+            return $s;
+        }
+        return $v;
+    }
 
 	public function get_lang() {
         $lang = substr( get_locale(), 0, 2 );
