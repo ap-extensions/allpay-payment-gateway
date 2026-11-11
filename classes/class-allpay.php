@@ -63,14 +63,16 @@ class WC_Allpay extends WC_Payment_Gateway {
         $order_id = $input['order_id'] ?? '';
         $status   = (int) ( $input['status'] ?? 0 );
 
-        if ( $sign !== '' && hash_equals( $this->get_signature( $input ), $sign )
+        if ( ! empty( $this->api_key ) && $sign !== '' && hash_equals( $this->get_signature( $input ), $sign )
                 && $order_id > 0 && $status == 1 && empty( $input['preauth'] ) ) {
             $customer_order = wc_get_order( $order_id );
-            if ( $customer_order ) {
+            if ( $customer_order && $customer_order->get_payment_method() === $this->id ) {
                 $customer_order->payment_complete( (int) $order_id );
             }
         } else {
-            echo 'Notification error: ' . json_encode( $input );
+            status_header( 400 );
+            header( 'Content-Type: text/plain; charset=utf-8' );
+            echo 'Notification error';
         }
         exit();
 	}

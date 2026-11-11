@@ -4,7 +4,7 @@ Tags: payment provider, Israel, платежная система, Израил�
 Requires PHP: 7.0
 Requires at least: 4.7
 Tested up to: 7.1.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,9 @@ Same day.
 On the 6th day of each month, with an option for weekly credits.
 
 == Changelog ==
+= 1.3.1 – 11 November 2026 =
+* Security: Hardened the payment notification handler. Updating is strongly recommended.
+
 = 1.3.0 – 9 November 2026 =
 * New: Switched to Allpay API v15.
 * New: Payment requests are sent as JSON.
