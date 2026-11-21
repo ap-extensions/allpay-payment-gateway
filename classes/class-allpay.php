@@ -61,13 +61,14 @@ class WC_Allpay extends WC_Payment_Gateway {
 
         $sign     = ( isset( $input['sign'] ) && is_string( $input['sign'] ) ) ? $input['sign'] : '';
         $order_id = $input['order_id'] ?? '';
+        $order_id = ( is_int( $order_id ) || ( is_string( $order_id ) && ctype_digit( $order_id ) ) ) ? (int) $order_id : 0;
         $status   = (int) ( $input['status'] ?? 0 );
 
         if ( ! empty( $this->api_key ) && $sign !== '' && hash_equals( $this->get_signature( $input ), $sign )
                 && $order_id > 0 && $status == 1 && empty( $input['preauth'] ) ) {
             $customer_order = wc_get_order( $order_id );
             if ( $customer_order && $customer_order->get_payment_method() === $this->id ) {
-                $customer_order->payment_complete( (int) $order_id );
+                $this->handle_paid_notification( $customer_order, $input );
             }
         } else {
             status_header( 400 );
@@ -76,6 +77,50 @@ class WC_Allpay extends WC_Payment_Gateway {
         }
         exit();
 	}
+
+    /**
+     * Completes the order for a verified "paid" notification after checking
+     * that the notification matches the payment that was requested for it.
+     */
+    private function handle_paid_notification( $order, $input ) {
+        if ( $order->is_paid() ) {
+            return;
+        }
+
+        $payment_id = '';
+        if ( isset( $input['payment_id'] ) && is_scalar( $input['payment_id'] ) ) {
+            $payment_id = sanitize_text_field( (string) $input['payment_id'] );
+        }
+
+        if ( ! empty( $input['test_mode'] ) ) {
+            $order->add_order_note( __( 'Allpay: test payment received. The order was not marked as paid.', 'allpay-payment-gateway' ) );
+            return;
+        }
+
+        // Amount check. Only when no currency conversion was requested, since with
+        // conversion the notified amount may be in a different currency.
+        $requested_amount   = $order->get_meta( '_allpay_amount' );
+        $requested_currency = $order->get_meta( '_allpay_currency' );
+        if ( $requested_amount === '' ) {
+            $requested_amount   = $order->get_total();
+            $requested_currency = ( $this->currency_payment ?: 'ILS' );
+        }
+        if ( $requested_currency === $order->get_currency() ) {
+            $paid_amount = ( isset( $input['amount'] ) && is_numeric( $input['amount'] ) ) ? (float) $input['amount'] : null;
+            if ( $paid_amount === null || round( $paid_amount, 2 ) < round( (float) $requested_amount, 2 ) ) {
+                $order->update_status( 'on-hold', sprintf(
+                    /* translators: 1: paid amount, 2: order amount, 3: currency code */
+                    __( 'Allpay: paid amount %1$s does not match the order amount %2$s %3$s. Check the payment before processing the order.', 'allpay-payment-gateway' ),
+                    $paid_amount === null ? '?' : $paid_amount,
+                    $requested_amount,
+                    $requested_currency
+                ) );
+                return;
+            }
+        }
+
+        $order->payment_complete( $payment_id );
+    }
 
 	public function init_form_fields() {
 		$this->form_fields = array(
@@ -183,7 +228,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 			"currency_payment"		=> ($this->currency_payment ?: 'ILS'),
             "currency_display"      => get_woocommerce_currency(),
 			"lang"					=> $this->get_lang(),
-			"order_id"        		=> str_replace( "#", "", $customer_order->get_order_number() ),
+			"order_id"        		=> (string) $customer_order->get_id(),
 			"client_name"			=> $full_name,
 			"client_phone"			=> $customer_order->get_billing_phone(),
 			"client_email"			=> $customer_order->get_billing_email(),
@@ -252,12 +297,15 @@ class WC_Allpay extends WC_Payment_Gateway {
 
 		$request['sign'] = $this->get_signature( $request );
 
+		$customer_order->update_meta_data( '_allpay_amount', (string) $request['amount'] );
+		$customer_order->update_meta_data( '_allpay_currency', $request['currency_payment'] );
+		$customer_order->save();
+
 		$response = wp_remote_post( $environment_url, array(
 			'method'    => 'POST',
 			'headers'   => array( 'Content-Type' => 'application/json' ),
 			'body'      => wp_json_encode( $request ),
 			'timeout'   => 90,
-			'sslverify' => false,
 		) );
 		if ( is_wp_error( $response ) ) {
 			throw new Exception( __( 'We are currently experiencing problems trying to connect to this payment gateway. Sorry for the inconvenience.', 'allpay-payment-gateway' ) );

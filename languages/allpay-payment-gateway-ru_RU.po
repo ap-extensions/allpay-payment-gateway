@@ -183,3 +183,12 @@ msgstr "В данный момент возникли проблемы с под
 #: classes/class-allpay.php:290
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
+
+#: classes/class-allpay.php:96
+msgid "Allpay: test payment received. The order was not marked as paid."
+msgstr "Allpay: получен тестовый платёж. Заказ не отмечен как оплаченный."
+
+#: classes/class-allpay.php:113
+#, php-format
+msgid "Allpay: paid amount %1$s does not match the order amount %2$s %3$s. Check the payment before processing the order."
+msgstr "Allpay: оплаченная сумма %1$s не совпадает с суммой заказа %2$s %3$s. Проверьте платёж, прежде чем обрабатывать заказ."
