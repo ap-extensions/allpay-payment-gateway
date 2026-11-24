@@ -87,23 +87,37 @@ class WC_Allpay extends WC_Payment_Gateway {
             return;
         }
 
+        // Transaction ID: the signed transaction_id of the webhook when Allpay sends it,
+        // otherwise the payment ID taken from payment_url when the payment was created
+        // (see process_payment). API v16 webhooks do not carry it.
         $payment_id = '';
-        if ( isset( $input['payment_id'] ) && is_scalar( $input['payment_id'] ) ) {
-            $payment_id = sanitize_text_field( (string) $input['payment_id'] );
+        if ( isset( $input['transaction_id'] ) && is_scalar( $input['transaction_id'] ) && ctype_digit( (string) $input['transaction_id'] ) ) {
+            $payment_id = (string) $input['transaction_id'];
+        }
+        if ( $payment_id === '' ) {
+            $payment_id = (string) $order->get_meta( '_allpay_payment_id' );
         }
 
+        // test_mode is sent in webhooks of payments created with API v16 and newer
         if ( ! empty( $input['test_mode'] ) ) {
             $order->add_order_note( __( 'Allpay: test payment received. The order was not marked as paid.', 'allpay-payment-gateway' ) );
             return;
         }
 
-        // Amount check. Only when no currency conversion was requested, since with
-        // conversion the notified amount may be in a different currency.
-        $requested_amount   = $order->get_meta( '_allpay_amount' );
-        $requested_currency = $order->get_meta( '_allpay_currency' );
+        // Amount check. The webhook amount is the amount of the payment after
+        // discounts in the display currency (currency_display), which the plugin
+        // sets to the store currency, so it is comparable even when the card is
+        // charged in another currency.
+        $requested_amount = $order->get_meta( '_allpay_amount' );
         if ( $requested_amount === '' ) {
-            $requested_amount   = $order->get_total();
-            $requested_currency = ( $this->currency_payment ?: 'ILS' );
+            $requested_amount = $order->get_total();
+        }
+        if ( isset( $input['currency_display'] ) && is_string( $input['currency_display'] ) ) {
+            $requested_currency = $input['currency_display'];
+        } else {
+            // Webhooks of payments created before API v15 have no currency_display:
+            // compare only when no currency conversion was requested.
+            $requested_currency = $order->get_meta( '_allpay_currency' ) ?: ( $this->currency_payment ?: 'ILS' );
         }
         if ( $requested_currency === $order->get_currency() ) {
             $paid_amount = ( isset( $input['amount'] ) && is_numeric( $input['amount'] ) ) ? (float) $input['amount'] : null;
@@ -200,7 +214,7 @@ class WC_Allpay extends WC_Payment_Gateway {
 
 		$customer_order = wc_get_order( $order_id );
 
-		$environment_url = 'https://allpay.to/app/?show=getpayment&mode=api15';
+		$environment_url = 'https://allpay.to/app/?show=getpayment&mode=api16';
 		
 		$user_id = get_current_user_id();
 
@@ -318,6 +332,14 @@ class WC_Allpay extends WC_Payment_Gateway {
 		}
 		
 		if ( isset($response['payment_url']) ) {
+			$query = wp_parse_url( $response['payment_url'], PHP_URL_QUERY );
+			if ( is_string( $query ) ) {
+				parse_str( $query, $url_params );
+				if ( isset( $url_params['payment_id'] ) && ctype_digit( (string) $url_params['payment_id'] ) ) {
+					$customer_order->update_meta_data( '_allpay_payment_id', (string) $url_params['payment_id'] );
+					$customer_order->save();
+				}
+			}
 			return array(
 				'result'   => 'success',
 				'redirect' => $response['payment_url'],
