@@ -183,8 +183,8 @@ msgstr ""
 msgid "Unknown error"
 msgstr ""
 
-#: classes/class-allpay.php:96
-msgid "Allpay: test payment received. The order was not marked as paid."
+#: classes/class-allpay.php:134
+msgid "Allpay: TEST payment. No money was charged."
 msgstr ""
 
 #: classes/class-allpay.php:113

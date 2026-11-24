@@ -98,12 +98,6 @@ class WC_Allpay extends WC_Payment_Gateway {
             $payment_id = (string) $order->get_meta( '_allpay_payment_id' );
         }
 
-        // test_mode is sent in webhooks of payments created with API v16 and newer
-        if ( ! empty( $input['test_mode'] ) ) {
-            $order->add_order_note( __( 'Allpay: test payment received. The order was not marked as paid.', 'allpay-payment-gateway' ) );
-            return;
-        }
-
         // Amount check. The webhook amount is the amount of the payment after
         // discounts in the display currency (currency_display), which the plugin
         // sets to the store currency, so it is comparable even when the card is
@@ -131,6 +125,13 @@ class WC_Allpay extends WC_Payment_Gateway {
                 ) );
                 return;
             }
+        }
+
+        // test_mode is sent in webhooks of payments created with API v16 and newer.
+        // Test payments complete the order (for testing the store), with a note
+        // so that a test mode left on by mistake is visible in the order.
+        if ( ! empty( $input['test_mode'] ) ) {
+            $order->add_order_note( __( 'Allpay: TEST payment. No money was charged.', 'allpay-payment-gateway' ) );
         }
 
         $order->payment_complete( $payment_id );

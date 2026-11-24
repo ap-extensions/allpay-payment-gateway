@@ -4,7 +4,7 @@ Tags: payment provider, Israel, платежная система, Израил�
 Requires PHP: 7.0
 Requires at least: 4.7
 Tested up to: 7.1.4
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,9 @@ Same day.
 On the 6th day of each month, with an option for weekly credits.
 
 == Changelog ==
+= 1.3.4 – 24 November 2026 =
+* Fix: Test payments mark the order as paid. Such orders get the note that no money was charged.
+
 = 1.3.3 – 24 November 2026 =
 * Fix: The transaction ID of WooCommerce orders stayed empty after 1.3.2. The Allpay payment ID is now saved to new orders.
 * Fix: Test payments are now recognized and no longer mark the order as paid.

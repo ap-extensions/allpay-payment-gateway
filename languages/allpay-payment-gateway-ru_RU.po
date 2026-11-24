@@ -184,9 +184,9 @@ msgstr "В данный момент возникли проблемы с под
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
 
-#: classes/class-allpay.php:96
-msgid "Allpay: test payment received. The order was not marked as paid."
-msgstr "Allpay: получен тестовый платёж. Заказ не отмечен как оплаченный."
+#: classes/class-allpay.php:134
+msgid "Allpay: TEST payment. No money was charged."
+msgstr "Allpay: ТЕСТОВЫЙ платёж. Деньги не списаны."
 
 #: classes/class-allpay.php:113
 #, php-format

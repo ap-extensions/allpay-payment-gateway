@@ -184,9 +184,9 @@ msgstr "אנו חווים כעת בעיות בהתחברות לשער התשלו
 msgid "Unknown error"
 msgstr "שגיאה לא ידועה"
 
-#: classes/class-allpay.php:96
-msgid "Allpay: test payment received. The order was not marked as paid."
-msgstr "Allpay: התקבל תשלום בדיקה. ההזמנה לא סומנה כשולמה."
+#: classes/class-allpay.php:134
+msgid "Allpay: TEST payment. No money was charged."
+msgstr "Allpay: תשלום בדיקה. לא בוצע חיוב בפועל."
 
 #: classes/class-allpay.php:113
 #, php-format
